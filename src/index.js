@@ -6,6 +6,7 @@ import { TodoList } from "./components/TodoList";
 
 ReactDOM.render(
   <>
+    {/* Context APIと同じでProviderを設定 */}
     <RecoilRoot>
       <TodoList />
     </RecoilRoot>

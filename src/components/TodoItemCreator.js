@@ -10,9 +10,13 @@ const getId = () => {
 
 export const TodoItemCreator = () => {
   const [inputValue, setInputValue] = useState("");
+  // todoListStateのsetter関数を代入
   const setTodoList = useSetRecoilState(todoListState);
 
+  // todoListStateに新しいitemを追加する
   const addItem = () => {
+    // useSetRecoilStateで宣言したsetter関数
+    // 第一引数はstate
     setTodoList((oldTodoList) => [
       ...oldTodoList,
       {
