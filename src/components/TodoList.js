@@ -1,9 +1,10 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 
-import { todoListState } from "~/recoil/atoms";
+import { todoListState } from "../recoil/atoms";
 
-import { TodoItemCreator, TodoItem } from "~/components";
+import { TodoItemCreator } from "./TodoItemCreator";
+import { TodoItem } from "./TodoItem";
 
 export const TodoList = () => {
   const todoList = useRecoilValue(todoListState);

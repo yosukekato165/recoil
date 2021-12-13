@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { todoListState } from "~/recoil/atoms";
+import { todoListState } from "../recoil/atoms";
 
 // utility for creating unique Id
 let id = 0;

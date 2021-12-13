@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 
-import { todoListState } from "~/recoil/atoms";
+import { todoListState } from "../recoil/atoms";
 
 const replaceItemAtIndex = (arr, index, newValue) => {
   return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
