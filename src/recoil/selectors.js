@@ -4,8 +4,14 @@ import { todoListState, todoListFilterState } from "./atoms";
 export const filteredTodoListState = selector({
   key: "filteredTodoListState",
   get: ({ get }) => {
+    // get() - 他のatom/selectorから値を取得するために使用される関数です。
+    // この関数に渡されたすべてのtom/selectorは、暗黙のうちにselectorの依存関係のリストに追加されます。
+    // selectorの依存関係のいずれかが変更されると、selectorは再評価されます。
     const filter = get(todoListFilterState);
     const list = get(todoListState);
+
+    // todoListFilterStateとtodoListStateをfilteredTodoListStateに接続して、
+    // filterの値によってstoreの値をlistから選別している
 
     switch (filter) {
       case "Show Completed":
