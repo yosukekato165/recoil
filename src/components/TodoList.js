@@ -19,9 +19,9 @@ export const TodoList = () => {
       <TodoListStats />
       <TodoListFilters />
       <TodoItemCreator />
-      {todoList.map((todoItem) => (
-        <TodoItem key={todoItem.id} item={todoItem} />
-      ))}
+      {todoList.map((todoItem) => {
+        return <TodoItem key={todoItem._id} item={todoItem} />;
+      })}
     </>
   );
 };

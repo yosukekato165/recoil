@@ -1,12 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { todoListState } from "../recoil/atoms";
-
-// utility for creating unique Id
-let id = 0;
-const getId = () => {
-  return id++;
-};
 
 export const TodoItemCreator = () => {
   const [inputValue, setInputValue] = useState("");
@@ -15,16 +10,18 @@ export const TodoItemCreator = () => {
 
   // todoListStateに新しいitemを追加する
   const addItem = () => {
-    // useSetRecoilStateで宣言したsetter関数
-    // 第一引数はstate
-    setTodoList((oldTodoList) => [
-      ...oldTodoList,
-      {
-        id: getId(),
+    axios
+      .post("http://localhost:3030/reference", {
         text: inputValue,
         isComplete: false,
-      },
-    ]);
+      })
+      .then((res) => {
+        // useSetRecoilStateで宣言したsetter関数
+        // 第一引数はstate
+        const todoListInMongoDB = res.data;
+        setTodoList(todoListInMongoDB);
+      });
+
     setInputValue("");
   };
 

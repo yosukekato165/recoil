@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useRecoilState } from "recoil";
 
 import { todoListState } from "../recoil/atoms";
@@ -15,15 +16,6 @@ export const TodoItem = ({ item }) => {
   const [todoList, setTodoList] = useRecoilState(todoListState);
   const index = todoList.findIndex((listItem) => listItem === item);
 
-  const editItemText = ({ target: { value } }) => {
-    const newList = replaceItemAtIndex(todoList, index, {
-      ...item,
-      text: value,
-    });
-
-    setTodoList(newList);
-  };
-
   const toggleItemCompletion = () => {
     const newList = replaceItemAtIndex(todoList, index, {
       ...item,
@@ -33,20 +25,42 @@ export const TodoItem = ({ item }) => {
     setTodoList(newList);
   };
 
-  const deleteItem = () => {
+  const deleteItem = (id) => {
+    console.log(id);
+    axios.delete("http://localhost:3030/delete", {
+      _id: id,
+    });
     const newList = removeItemAtIndex(todoList, index);
     setTodoList(newList);
   };
 
   return (
-    <div>
-      <input type="text" value={item.text} onChange={editItemText} />
-      <input
-        type="checkbox"
-        checked={item.isComplete}
-        onChange={toggleItemCompletion}
-      />
-      <button onClick={deleteItem}>x</button>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        width: "300px",
+        marginBottom: "30px",
+        padding: "10px",
+        border: "solid 1px #333",
+      }}
+    >
+      <p
+        style={{
+          display: "inline-block",
+          width: "100px",
+        }}
+      >
+        {item.text}
+      </p>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <input
+          type="checkbox"
+          checked={item.isComplete}
+          onChange={toggleItemCompletion}
+        />
+        <button onClick={() => deleteItem(item._id)}>x</button>
+      </div>
     </div>
   );
 };
