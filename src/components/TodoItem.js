@@ -27,8 +27,10 @@ export const TodoItem = ({ item }) => {
 
   const deleteItem = (id) => {
     console.log(id);
-    axios.delete("http://localhost:3030/delete", {
-      _id: id,
+    axios.request({
+      method: "delete",
+      url: "http://localhost:3030/delete",
+      data: { _id: id },
     });
     const newList = removeItemAtIndex(todoList, index);
     setTodoList(newList);
