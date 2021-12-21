@@ -25,13 +25,14 @@ export const TodoItem = ({ item }) => {
     setTodoList(newList);
   };
 
-  const deleteItem = (id) => {
+  const deleteItem = async (id) => {
     console.log(id);
-    axios.request({
+    await axios.request({
       method: "delete",
       url: "http://localhost:3030/delete",
       data: { _id: id },
     });
+
     const newList = removeItemAtIndex(todoList, index);
     setTodoList(newList);
   };

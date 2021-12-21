@@ -9,19 +9,18 @@ export const filteredTodoListState = selector({
     // この関数に渡されたすべてのtom/selectorは、暗黙のうちにselectorの依存関係のリストに追加されます。
     // selectorの依存関係のいずれかが変更されると、selectorは再評価されます。
     const filter = get(todoListFilterState);
-    // const list = get(todoListState);
+    let list = get(todoListState);
 
-    const list = await axios
-      .request({
-        method: "get",
-        url: "http://localhost:3030/reference",
-      })
-      .then((res) => {
-        const todoListInMongoDB = res.data;
-        // setTodoList();
-        console.log(todoListInMongoDB);
-        return todoListInMongoDB;
-      });
+    if (!list.length) {
+      list = await axios
+        .request({
+          method: "get",
+          url: "http://localhost:3030/reference",
+        })
+        .then((res) => {
+          return res.data;
+        });
+    }
 
     // todoListFilterStateとtodoListStateをfilteredTodoListStateに接続して、
     // filterの値によってstoreの値をlistから選別している

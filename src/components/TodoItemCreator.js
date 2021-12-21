@@ -9,8 +9,8 @@ export const TodoItemCreator = () => {
   const setTodoList = useSetRecoilState(todoListState);
 
   // todoListStateに新しいitemを追加する
-  const addItem = () => {
-    axios
+  const addItem = async () => {
+    await axios
       .post("http://localhost:3030/reference", {
         text: inputValue,
         isComplete: false,
