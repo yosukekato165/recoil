@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import axios from "axios";
+import React from "react";
+import { useRecoilValue } from "recoil";
 
 import { filteredTodoListState } from "../recoil/selectors";
-import { todoListState } from "../recoil/atoms";
 
 import { TodoItemCreator } from "./TodoItemCreator";
 import { TodoItem } from "./TodoItem";
@@ -12,7 +10,6 @@ import { TodoListStats } from "./TodoListStats";
 
 export const TodoList = () => {
   // todoListStateの値をuseRecoilValueでコンポーネントに読み込む
-  // const todoList = useRecoilValue(todoListState);
   const filteredTodoList = useRecoilValue(filteredTodoListState);
 
   return (
